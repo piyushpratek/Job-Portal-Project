@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <>
             <nav className=' py-4 flex justify-between items-center'>
-                <Link>
+                <Link to="">
                     <img src="/logo.png" className=' h-20' alt="" />
                 </Link>
 
