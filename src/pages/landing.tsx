@@ -1,5 +1,17 @@
 import { Button } from "@/components/ui/button"
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { Link } from "react-router-dom"
+import Autoplay from "embla-carousel-autoplay"
+import companies from "../data/companies.json"
+import faqs from "../data/faq.json"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion"
+
 
 const LandingPage = () => {
     return (
@@ -22,15 +34,61 @@ const LandingPage = () => {
                     </Button>
                 </Link>
             </div>
+
             {/* carousel */}
+            <Carousel
+                plugins={[
+                    Autoplay({
+                        delay: 2000,
+                    }),
+                ]}
+                className="w-full py-10"
+            >
+                <CarouselContent className="flex gap-5 sm:gap-20 items-center">
+                    {companies.map(({ name, id, path }) => (
+                        <CarouselItem key={id} className="basis-1/3 lg:basis-1/6 ">
+                            <img
+                                src={path}
+                                alt={name}
+                                className="h-9 sm:h-14 object-contain"
+                            />
+                        </CarouselItem>
+                    ))}
+                </CarouselContent>
+            </Carousel>
+
 
             {/* banner */}
+            <img src="/banner.jpeg" className="w-full" />
 
-            <section>
-                {/* cards */}
+            <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="font-bold">For Job Seekers</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        Search and apply for jobs, track applications, and more.
+                    </CardContent>
+                </Card>
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="font-bold">For Employers</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        Post jobs, manage applications, and find the best candidates.
+                    </CardContent>
+                </Card>
             </section>
 
             {/* accordion */}
+            <Accordion type="multiple" className="w-full">
+                {faqs.map((faq, index) => (
+                    <AccordionItem key={index} value={`item-${index + 1}`}>
+                        <AccordionTrigger>{faq.question}</AccordionTrigger>
+                        <AccordionContent>{faq.answer}</AccordionContent>
+                    </AccordionItem>
+                ))}
+            </Accordion>
         </main>
     )
 }
