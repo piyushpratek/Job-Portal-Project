@@ -17,7 +17,7 @@ const Header = () => {
         }
     }, [search]);
 
-    const handleOverlayClick = (e) => {
+    const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
         if (e.target === e.currentTarget) {
             setShowSignIn(false);
             setSearch({});
