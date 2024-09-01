@@ -6,7 +6,6 @@ import { BarLoader } from "react-spinners";
 
 const Onboarding = () => {
     const { user, isLoaded } = useUser()
-    console.log(user);
     const navigate = useNavigate();
 
     type Role = "candidate" | "recruiter";
@@ -20,7 +19,6 @@ const Onboarding = () => {
             console.error("User is not available");
             return;
         }
-
         try {
             await user.update({ unsafeMetadata: { role } });
             console.log(`Role updated to: ${role}`);
