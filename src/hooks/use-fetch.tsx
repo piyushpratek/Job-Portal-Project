@@ -1,41 +1,32 @@
-import { useSession } from "@clerk/clerk-react";
-import { useState } from "react";
+import { useSession } from '@clerk/clerk-react';
+import { useState } from 'react';
 
-type FetchCallback = (token: string, options: Record<string, unknown>, ...args: unknown[]) => Promise<unknown>;
+type FetchCallback<T, U extends any[]> = (token: string, params: T, ...args: U) => Promise<any>;
 
-const useFetch = (cb: FetchCallback, options: Record<string, unknown> = {}) => {
-    const [data, setData] = useState<unknown>(undefined);
-    const [loading, setLoading] = useState<boolean | null>(null);
+const useFetch = <T, U extends any[]>(cb: FetchCallback<T, U>, options: T = {} as T) => {
+    const [data, setData] = useState<any>(undefined);
+    const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<Error | null>(null);
 
     const { session } = useSession();
 
-    const fn = async (...args: unknown[]) => {
+    const fn = async (...args: U) => {
         setLoading(true);
         setError(null);
 
-        if (!session) {
-            setError(new Error("Session is not available"));
-            setLoading(false);
-            return;
-        }
-
         try {
-            const supabaseAccessToken = await session.getToken({
-                template: "supabase",
+            const supabaseAccessToken = await session?.getToken({
+                template: 'supabase',
             });
-            if (!supabaseAccessToken) {
-                throw new Error("Failed to retrieve Supabase token");
+            // Check if supabaseAccessToken is valid
+            if (typeof supabaseAccessToken !== 'string') {
+                throw new Error('Supabase access token is not available.');
             }
             const response = await cb(supabaseAccessToken, options, ...args);
             setData(response);
             setError(null);
-        } catch (error: unknown) {
-            if (error instanceof Error) {
-                setError(error);
-            } else {
-                setError(new Error("Unknown error occurred"));
-            }
+        } catch (error) {
+            setError(error as Error);
         } finally {
             setLoading(false);
         }
