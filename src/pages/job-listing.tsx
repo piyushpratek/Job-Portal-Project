@@ -129,6 +129,7 @@ const JobListing = () => {
                         </SelectGroup>
                     </SelectContent>
                 </Select>
+
                 <Button
                     className="sm:w-1/2"
                     variant="destructive"
