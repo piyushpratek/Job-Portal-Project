@@ -8,7 +8,7 @@ import { useUser } from "@clerk/clerk-react";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem } from "@radix-ui/react-select";
 import { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
-
+import { State } from "country-state-city";
 
 const JobListing = () => {
     const [searchQuery, setSearchQuery] = useState("");
@@ -90,13 +90,13 @@ const JobListing = () => {
                     </SelectTrigger>
                     <SelectContent>
                         <SelectGroup>
-                            {/* {State.getStatesOfCountry("IN").map(({ name }) => {
+                            {State.getStatesOfCountry("IN").map(({ name }) => {
                                 return (
                                     <SelectItem key={name} value={name}>
                                         {name}
                                     </SelectItem>
                                 );
-                            })} */}
+                            })}
                         </SelectGroup>
                     </SelectContent>
                 </Select>
