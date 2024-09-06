@@ -37,11 +37,12 @@ const JobListing = () => {
         if (isLoaded) {
             fnCompanies();
         }
-    }, [fnCompanies, isLoaded]);
+    }, [isLoaded]);
+
 
     useEffect(() => {
         if (isLoaded) fnJobs();
-    }, [isLoaded, location, company_id, searchQuery, fnJobs]);
+    }, [isLoaded, location, company_id, searchQuery]);
 
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
