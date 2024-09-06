@@ -5,7 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import useFetch from "@/hooks/use-fetch";
 import { useUser } from "@clerk/clerk-react";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem } from "@radix-ui/react-select";
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 import { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
 import { State } from "country-state-city";
@@ -69,6 +76,7 @@ const JobListing = () => {
             <h1 className="gradient-title font-extrabold text-6xl sm:text-7xl text-center pb-8">
                 Latest Jobs
             </h1>
+
             <form
                 onSubmit={handleSearch}
                 className="h-14 flex flex-row w-full gap-2 items-center mb-3"
