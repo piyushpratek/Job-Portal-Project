@@ -78,21 +78,6 @@ export async function saveJob(token: string, { alreadySaved }: SaveJobParams, sa
     }
 }
 
-// Read Saved Jobs
-export async function getSavedJobs(token: string) {
-    const supabase = await supabaseClient(token);
-    const { data, error } = await supabase
-        .from("saved_jobs")
-        .select("*, job: jobs(*, company: companies(name,logo_url))");
-
-    if (error) {
-        console.error("Error fetching Saved Jobs:", error);
-        return null;
-    }
-
-    return data;
-}
-
 // Read single job
 export async function getSingleJob(token: string, { job_id }: { job_id: string | number }) {
     const supabase = await supabaseClient(token);
@@ -113,6 +98,22 @@ export async function getSingleJob(token: string, { job_id }: { job_id: string |
 
     return data;
 }
+
+// Read Saved Jobs
+export async function getSavedJobs(token: string) {
+    const supabase = await supabaseClient(token);
+    const { data, error } = await supabase
+        .from("saved_jobs")
+        .select("*, job: jobs(*, company: companies(name,logo_url))");
+
+    if (error) {
+        console.error("Error fetching Saved Jobs:", error);
+        return null;
+    }
+
+    return data;
+}
+
 
 type UpdateHiringStatusParams = {
     job_id: string | number;
