@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 import MDEditor from '@uiw/react-md-editor';
+import { ApplyJobDrawer } from "@/components/apply-job";
 
 const JobPage = () => {
 
@@ -99,14 +100,14 @@ const JobPage = () => {
                 source={job?.requirements}
                 className="bg-transparent sm:text-lg" // add global ul styles - index.css refer
             />
-            {/* {job?.recruiter_id !== user?.id && (
+            {job?.recruiter_id !== user?.id && (
                 <ApplyJobDrawer
                     job={job}
                     user={user}
                     fetchJob={fnJob}
-                    applied={job?.applications?.find((ap) => ap.candidate_id === user.id)}
+                    applied={job?.applications?.find((ap: { candidate_id: string; }) => ap.candidate_id === user?.id)}
                 />
-            )} */}
+            )}
             {/* {loadingHiringStatus && <BarLoader width={"100%"} color="#36d7b7" />}
             {job?.applications?.length > 0 && job?.recruiter_id === user?.id && (
                 <div className="flex flex-col gap-2">
