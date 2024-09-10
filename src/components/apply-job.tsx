@@ -19,7 +19,7 @@ import useFetch from "@/hooks/use-fetch";
 import { applyToJob } from "@/api/apiApplications";
 import { BarLoader } from "react-spinners";
 import { User } from "@supabase/supabase-js";
-import { Job } from "./job-card";
+import { Job } from "@/types/jobType";
 
 const schema = z.object({
   experience: z
