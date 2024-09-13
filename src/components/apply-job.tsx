@@ -18,8 +18,8 @@ import * as z from "zod";
 import useFetch from "@/hooks/use-fetch";
 import { applyToJob } from "@/api/apiApplications";
 import { BarLoader } from "react-spinners";
-import { User } from "@supabase/supabase-js";
 import { Job } from "@/types/jobType";
+import { User } from "@/types/userType";
 
 const schema = z.object({
   experience: z
@@ -64,7 +64,7 @@ export function ApplyJobDrawer({ user, job, fetchJob, applied = false }: ApplyJo
     control,
     formState: { errors },
     reset,
-  } = useForm({
+  } = useForm<ApplyFormData>({
     resolver: zodResolver(schema),
   });
 
