@@ -1,7 +1,7 @@
 import supabaseClient, { supabaseUrl } from "@/utils/supabase";
 
 // - Apply to job ( candidate )
-export async function applyToJob(token: string, _: any, jobData: { candidate_id: number | string; resume: string | ArrayBuffer | ArrayBufferView | Blob | Buffer | File | FormData | NodeJS.ReadableStream | ReadableStream<Uint8Array> | URLSearchParams; }) {
+export async function applyToJob(token: string, _: any, jobData: { job_id: number | string; name: string; status: string; candidate_id: number | string; resume: string | ArrayBuffer | ArrayBufferView | Blob | Buffer | File | FormData | NodeJS.ReadableStream | ReadableStream<Uint8Array> | URLSearchParams; }) {
     const supabase = await supabaseClient(token);
 
     const random = Math.floor(Math.random() * 90000);
