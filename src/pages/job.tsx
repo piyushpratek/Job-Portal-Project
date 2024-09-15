@@ -100,12 +100,18 @@ const JobPage = () => {
                 source={job?.requirements}
                 className="bg-transparent sm:text-lg" // add global ul styles - index.css refer
             />
-            {job?.recruiter_id !== user?.id && (
+            {user && job?.recruiter_id !== user?.id && (
                 <ApplyJobDrawer
                     job={job}
-                    user={user}
+                    user={{
+                        id: user.id,
+                        fullName: user.fullName || "", // Provide a fallback for nullable fullName
+                        email: user.emailAddresses?.[0]?.emailAddress, // Provide fallback for nullable email
+                    }}
                     fetchJob={fnJob}
-                    applied={job?.applications?.find((ap: { candidate_id: string; }) => ap.candidate_id === user?.id)}
+                    applied={job?.applications?.find(
+                        (ap: { candidate_id: string }) => ap.candidate_id === user.id
+                    )}
                 />
             )}
             {/* {loadingHiringStatus && <BarLoader width={"100%"} color="#36d7b7" />}
