@@ -179,6 +179,5 @@ export function ApplyJobDrawer({ user, job, fetchJob, applied = false }: ApplyJo
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
-
   );
 }
