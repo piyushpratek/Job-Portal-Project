@@ -1,3 +1,4 @@
+import { Job } from "@/types/jobType";
 import supabaseClient from "@/utils/supabase";
 
 // Defining the parameters for the getJobs function
@@ -172,6 +173,23 @@ export async function deleteJob(token: string, { job_id }: DeleteJobParams) {
     if (deleteError) {
         console.error("Error deleting job:", deleteError);
         return data;
+    }
+
+    return data;
+}
+
+// - post job
+export async function addNewJob(token: string, _: any, jobData: Job) {
+    const supabase = await supabaseClient(token);
+
+    const { data, error } = await supabase
+        .from("jobs")
+        .insert([jobData])
+        .select();
+
+    if (error) {
+        console.error(error);
+        throw new Error("Error Creating Job");
     }
 
     return data;

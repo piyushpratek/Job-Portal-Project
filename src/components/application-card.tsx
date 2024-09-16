@@ -24,20 +24,13 @@ interface ApplicationCardProps {
 }
 
 const ApplicationCard = ({ application, isCandidate = false }: ApplicationCardProps) => {
+
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = application?.resume;
     link.target = "_blank";
     link.click();
   };
-
-  // const { loading: loadingHiringStatus, fn: fnHiringStatus } = useFetch(
-  //   updateApplicationStatus,
-  //   {
-  //     job_id: application.job_id,
-  //   }
-  // );
-  // const token = localStorage.getItem("authToken") ?? "";  // Example to fetch token from localStorage
 
   const { loading: loadingHiringStatus, fn: fnHiringStatus } = useFetch(
     (token: string, { job_id }: { job_id: number }, status: string) => updateApplicationStatus(token, { job_id }, status),
