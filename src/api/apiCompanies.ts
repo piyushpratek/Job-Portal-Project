@@ -1,9 +1,10 @@
-import supabaseClient, { } from "@/utils/supabase";
+import supabaseClient, { supabaseUrl } from "@/utils/supabase";
 
-// interface CompanyData {
-//   name: string;
-//   logo: File; // assuming the logo is a File object
-// }
+interface CompanyData {
+  id: number;
+  name: string;
+  logo: string;
+}
 
 // Fetch Companies
 export async function getCompanies(token: string) {
@@ -19,34 +20,34 @@ export async function getCompanies(token: string) {
 }
 
 // Add Company
-// export async function addNewCompany(token: string, _: unknown, companyData: CompanyData) {
-//   const supabase = await supabaseClient(token);
+export async function addNewCompany(token: string, _: any, companyData: CompanyData) {
+  const supabase = await supabaseClient(token);
 
-//   const random = Math.floor(Math.random() * 90000);
-//   const fileName = `logo-${random}-${companyData.name}`;
+  const random = Math.floor(Math.random() * 90000);
+  const fileName = `logo-${random}-${companyData.name}`;
 
-//   const { error: storageError } = await supabase.storage
-//     .from("company-logo")
-//     .upload(fileName, companyData.logo);
+  const { error: storageError } = await supabase.storage
+    .from("company-logo")
+    .upload(fileName, companyData.logo);
 
-//   if (storageError) throw new Error("Error uploading Company Logo");
+  if (storageError) throw new Error("Error uploading Company Logo");
 
-//   const logo_url = `${supabaseUrl}/storage/v1/object/public/company-logo/${fileName}`;
+  const logo_url = `${supabaseUrl}/storage/v1/object/public/company-logo/${fileName}`;
 
-//   const { data, error } = await supabase
-//     .from("companies")
-//     .insert([
-//       {
-//         name: companyData.name,
-//         logo_url: logo_url,
-//       },
-//     ])
-//     .select();
+  const { data, error } = await supabase
+    .from("companies")
+    .insert([
+      {
+        name: companyData.name,
+        logo_url: logo_url,
+      },
+    ])
+    .select();
 
-//   if (error) {
-//     console.error(error);
-//     throw new Error("Error submitting Companys");
-//   }
+  if (error) {
+    console.error(error);
+    throw new Error("Error submitting Companys");
+  }
 
-//   return data;
-// }
+  return data;
+}

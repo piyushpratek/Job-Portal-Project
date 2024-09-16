@@ -1,4 +1,4 @@
-type Company = {
+export type Company = {
     id: number;
     logo_url: string;
     name: string;         // Name of the company
