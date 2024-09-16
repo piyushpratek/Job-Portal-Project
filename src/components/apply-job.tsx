@@ -75,8 +75,10 @@ export function ApplyJobDrawer({ user, job, fetchJob, applied = false }: ApplyJo
   } = useFetch(applyToJob);
 
   const onSubmit = (data: ApplyFormData) => {
+    const experienceValue = isNaN(data.experience) ? 0 : data.experience;  // Ensure it's a number
     fnApply({
       ...data,
+      experience: experienceValue,
       job_id: job.id,
       candidate_id: user.id,
       name: user.fullName,

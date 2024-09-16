@@ -1,6 +1,6 @@
 import { getCompanies } from "@/api/apiCompanies";
 import { getJobs } from "@/api/apiJobs";
-import JobCard, { Job } from "@/components/job-card";
+import JobCard from "@/components/job-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import useFetch from "@/hooks/use-fetch";
@@ -16,6 +16,7 @@ import {
 import { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
 import { State } from "country-state-city";
+import { Job } from "@/types/jobType";
 
 const JobListing = () => {
     const [searchQuery, setSearchQuery] = useState("");
