@@ -32,3 +32,35 @@ export async function applyToJob(token: string, _: any, jobData: { job_id: numbe
 
     return data;
 }
+
+// - Edit Application Status ( recruiter )
+export async function updateApplicationStatus(token: string, { job_id }: { job_id: number }, status: string) {
+    const supabase = await supabaseClient(token);
+    const { data, error } = await supabase
+        .from("applications")
+        .update({ status })
+        .eq("job_id", job_id)
+        .select();
+
+    if (error || data.length === 0) {
+        console.error("Error Updating Application Status:", error);
+        return null;
+    }
+
+    return data;
+}
+
+export async function getApplications(token: string, { user_id }: { user_id: string }) {
+    const supabase = await supabaseClient(token);
+    const { data, error } = await supabase
+        .from("applications")
+        .select("*, job:jobs(title, company:companies(name))")
+        .eq("candidate_id", user_id);
+
+    if (error) {
+        console.error("Error fetching Applications:", error);
+        return null;
+    }
+
+    return data;
+}
