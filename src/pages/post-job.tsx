@@ -43,7 +43,7 @@ const PostJob = () => {
         control,
         formState: { errors },
     } = useForm({
-        defaultValues: { title: "", description: "", location: "", company_id: "", requirements: "" },
+        defaultValues: { title: "", description: "", location: "", company_id: "", requirements: "", errorCreateJob: "" },
         resolver: zodResolver(schema),
     });
 
@@ -170,9 +170,9 @@ const PostJob = () => {
                 {errors.requirements && (
                     <p className="text-red-500">{errors.requirements.message}</p>
                 )}
-                {/* {errors.errorCreateJob && (
+                {errors.errorCreateJob && (
                     <p className="text-red-500">{errors?.errorCreateJob?.message}</p>
-                )} */}
+                )}
                 {errorCreateJob?.message && (
                     <p className="text-red-500">{errorCreateJob.message}</p>
                 )}
