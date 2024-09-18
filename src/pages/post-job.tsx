@@ -104,6 +104,7 @@ const PostJob = () => {
                 )}
 
                 <div className="flex gap-4 items-center">
+
                     <Controller
                         name="location"
                         control={control}
@@ -150,6 +151,7 @@ const PostJob = () => {
                         )}
                     />
                     <AddCompanyDrawer fetchCompanies={fnCompanies} />
+
                 </div>
                 {errors.location && (
                     <p className="text-red-500">{errors.location.message}</p>
